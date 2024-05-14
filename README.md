@@ -1,5 +1,6 @@
 Python for Everybody
 https://www.py4e.com/lessons
+Python course. Available on Coursera, edX, FreeCodeCamp, and free to University of Michigan Students.
 
 1: Installing Python
 2: Variables, expressions and statements
