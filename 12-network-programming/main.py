@@ -12,8 +12,7 @@ mysock.send(cmd)
 
 while True:
     data = mysock.recv(512)
-    if len(data) < 1:
-        break
+    if len(data) < 1: break
     print(data)
 mysock.close()
 
@@ -35,19 +34,18 @@ while True:
     picture = picture + data
 mysock.close()
 
-# # Look for the end of the header (2 CRLF)
+# Look for the end of the header 
 pos = picture.find(b"\r\n\r\n")
 print('Header length', pos)
 print(picture[:pos].decode())
 
-# # Skip past the header and save the picture data
+# Skip past the header and save the picture data
 picture = picture[pos+4:]
 fhand = open("stuff.jpg", "wb")
 fhand.write(picture)
 fhand.close()
 
 # Retrieve data over HTTP using urllib
-
 count = dict()
 fhand = urllib.request.urlopen('http://data.pr4e.org/romeo.txt')
 for line in fhand: 
@@ -68,6 +66,7 @@ while True:
 print(size, 'characters copied.')
 fhand.close()
 
+# Parsing HTML using regular expressions
 # Ignore SSL certificate errors
 ctx = ssl.create_default_context()
 ctx.check_hostname = False
@@ -79,12 +78,8 @@ links = re.findall(b'href="(http[s]?://.*?)"', html)
 for link in links: print(link.decode())
 
 # Parsing HTML using BeautifulSoup
-
+""""""
 from bs4 import BeautifulSoup
-
-ctx = ssl.create_default_context()
-ctx.check_hostname = False
-ctx.verify_mode = ssl.CERT_NONE
 
 url = input('Enter - ')
 html = urllib.request.urlopen(url, context=ctx).read()
@@ -97,3 +92,4 @@ for tag in tags:
     print('URL:', tag.get('href', None))
     print('Contents:', tag.contents)
     print('Attrs:', tag.attrs)
+
