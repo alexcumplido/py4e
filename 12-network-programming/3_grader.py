@@ -8,33 +8,33 @@ Find the link at position 18 (the first name is 1). Follow that link. Repeat thi
 Hint: The first character of the name of the last page that you will load is: B
 
 """
+# Importing libraries
 from bs4 import BeautifulSoup
 import urllib.request, urllib.parse, urllib.error
 import ssl
 
+
+# Ignore SSL certificate errors
 ctx = ssl.create_default_context()
 ctx.check_hostname = False
 ctx.verify_mode = ssl.CERT_NONE
 
+# Parsing the HTML and selecting the links
 URL = "http://py4e-data.dr-chuck.net/known_by_Eden.html"
 html = urllib.request.urlopen(URL, context=ctx).read()
-soup = BeautifulSoup(html, 'html.parser')
-tags = soup('a')
+tags = BeautifulSoup(html, 'html.parser')('a')
 
-input_pos = input('Enter position: ')
-input_count = input('Enter count: ')
+# Collecting user position and count
 try:
-    position = int(input_pos)
-    count = int(input_count)
+    position = int(input('Enter position: '))
+    count = int(input('Enter count: '))
 except:
     print('Some of the inputs were invalid')
     quit()
 
+# Following the links and printing the last name
 for number in range(count):
     link_pars = tags[position-1].get('href', None)
     print(link_pars)
     html_pars = urllib.request.urlopen(link_pars, context=ctx).read() 
-    soup_pars = BeautifulSoup(html_pars, 'html.parser')
-    tags = soup_pars('a')
-    
-
+    tags = BeautifulSoup(html_pars, 'html.parser')('a')
