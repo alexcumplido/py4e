@@ -29,11 +29,25 @@ while True:
     params = dict()
     params['q'] = address
 
-    url_complete = url_service + urllib.parse.urlencode(params)
+    url_complete = f"{url_service}{urllib.parse.urlencode(params)}"
     print('Retrieving', url_complete)
-
     uh = urllib.request.urlopen(url_complete, context=ctx)
     data = uh.read().decode()
-    info = json.loads(data)
-    plus_code = info["features"][0]['properties']['plus_code']
+    
+    try: 
+        js = json.loads(data)
+    except:
+        js = None
+
+    if not js or 'features' not in js:
+        print('=== Download error ===')
+        print(data)
+        break
+
+    if len(js['features']) == 0:
+        print('=== Object not found error ===')
+        print(data)
+        break
+
+    plus_code = js["features"][0]['properties']['plus_code']
     print(f"{address} plus code value: {plus_code}")
