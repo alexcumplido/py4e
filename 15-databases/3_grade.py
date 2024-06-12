@@ -16,15 +16,15 @@ cur.execute('DROP TABLE IF EXISTS Member')
 
 # Create tables with the schema and unique constraints
 cur.execute('''CREATE Table User
-            (id INTEGER NOT NULL PRIMARY KEY UNIQUE, name TEXT UNIQUE)
+            (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, name TEXT UNIQUE)
             ''')   
 
 cur.execute('''CREATE TABLE Course 
-            (id INTEGER NOT NULL PRIMARY KEY UNIQUE, title TEXT UNIQUE)
+            (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, title TEXT UNIQUE)
             ''')
 
 cur.execute('''CREATE TABLE Role
-            (id INTEGER NOT NULL PRIMARY KEY UNIQUE, name TEXT UNIQUE)
+            (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, name TEXT UNIQUE)
             ''')
 
 # Create a transition table  (many to many connector table) to handle the many to many relationship
