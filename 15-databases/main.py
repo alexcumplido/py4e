@@ -86,9 +86,9 @@ for line in handle:
     
     conn.commit()
 
-# What we want to see
-# The tables wich hold the data
-# How the tables are linked
+    # What we want to see
+    # The tables wich hold the data
+    # How the tables are linked
 
 cur.execute('''
             SELECT Track.title, Artist.name, Album.title, Genre.name 
